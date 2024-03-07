@@ -9,7 +9,7 @@
 
 ##### &emsp;&emsp;&emsp; i)
 
-Le `main.c` applique une  convolution avec un laplacien sur une image afin d'appliquer un "filtre" sur une image.
+Le `main.c` applique une  convolution avec un laplacien sur une image afin d'appliquer un "filtre" sur une image. <br>
 Généralement, on utilise cette méthode pour "lisser" les bord d'une image en la rendant un peu plus flou et en mélangeant les couleurs.
 
 
@@ -26,7 +26,7 @@ Le `Makefile` se trouve dans `./ex1/Makefile`.
 Non, il y a une erreur de segmentation.
 
 #### &emsp; d)
-Le bug est une erreur de segmentation à cause de mauvaises bornes définies das la boucle.
+Le bug est une erreur de segmentation à cause de mauvaises bornes définies das la boucle. <br>
 Pour trouver cette erreur, j'ai utilisé `gdb`. Les premières lignes d'erreur qu'il m'a renvoyé sont les suivantes :
 ```c
 Program received signal SIGSEGV, Segmentation fault.
@@ -35,7 +35,7 @@ Program received signal SIGSEGV, Segmentation fault.
 ```
 
 #### &emsp; e)
-Les corrections ont été faites au lignes `19` et `20` dans le fichier `./ex1/main.c`.
+Les corrections ont été faites au lignes `19` et `20` dans le fichier `./ex1/main.c`. <br>
 Les images générées se trouvent dans `./ex1/medias`.
 
 
@@ -55,11 +55,11 @@ Il n'y a pas de plantage pour la même raison expliqué pour **`process_data`**.
 Le plantage est dû au fait que l'on dépasse la zone mémoire réservé au programme, il essaie d'écrire sur une case mémoire qui ne lui appartient pas.
 
 #### &emsp; c)
-Pour `process_data`, l'outil qui peut être utilisé pour détecter ce type d'erreur est **ASAN** (le paramètre `-fsanitize=address` dans le `gcc`).
+Pour `process_data`, l'outil qui peut être utilisé pour détecter ce type d'erreur est **ASAN** (le paramètre `-fsanitize=address` dans le `gcc`). <br>
 Pour `process_data3`, l'outil qui peut être utilisé pour détecter ce type d'erreur est **GBD**.
 
 #### &emsp; d)
-Une corruption mémoire ne mène pas toujours au plantage car il est possible que lorsqu'on sort d'un tableau, par exemple, on modifie une adresse du programme lui-même sans accéder à des cases mémoires qui ne lui appartient pas.
+Une corruption mémoire ne mène pas toujours au plantage car il est possible que lorsqu'on sort d'un tableau, par exemple, on modifie une adresse du programme lui-même sans accéder à des cases mémoires qui ne lui appartient pas. <br>
 Cela peut causer des comportement indésirés plus tard dans le programme.
 
 
@@ -73,7 +73,7 @@ Une fuite de mémoire est un problème qui arrive lorsqu'on ne désalloue pas la
 L'outil à utiliser est `ASAN` ou `Valgrind`.
 
 #### &emsp; c)
-La correction se trouve dans `./ex3/leak.c` à la ligne `29`.
+La correction se trouve dans `./ex3/leak.c` à la ligne `29`. <br>
 Il fallait juste enlever le `++` à coté du `i`.
 
 ### <u> Exercice 4 </u>
@@ -85,8 +85,8 @@ Ce programme fait la somme de tous les éléments se trouvant dans un tableau de
 Le programme fonctionne correctement, il n'y a aucun retour d'erreur et le nombre retourné est `15`, ce qui est le résultat attendu.
 
 #### &emsp; c)
-A chaque tour de boucle, en utilisant `gdb`, j'obtient d'abord `1`, puis `3`, puis `6`, puis `10`, puis `15`, puis encore `15`.
-Ce résultat m'étonne malgré l'erreur présente sur la borne de la boucle qui est d'une unité trop grande. Il ne me donne pas la 6eme itération de boucle dans `gdb` et j'obtient aussi `15` deux fois en vérifiant la valeur de `sum` avec des `printf`. Néanmoins, la valeur finale devient anormale si l'on fait 7 itérations au lieu de 6.
+A chaque tour de boucle, en utilisant `gdb`, j'obtient d'abord `1`, puis `3`, puis `6`, puis `10`, puis `15`, puis encore `15`. <br>
+Ce résultat m'étonne malgré l'erreur présente sur la borne de la boucle qui est d'une unité trop grande. Il ne me donne pas la 6eme itération de boucle dans `gdb` et j'obtient aussi `15` deux fois en vérifiant la valeur de `sum` avec des `printf`. Néanmoins, la valeur finale devient anormale si l'on fait 7 itérations au lieu de 6. <br>
 Il est à noter que ASAN détecte bien l'overflow dû à la mauvaise borne de la boucle.
 
 Voici ce que me retourne `gdb` :
@@ -160,8 +160,8 @@ Continuing.
 ```
 
 #### &emsp; d)
-Dans tous les cas, il y a un problème avec la borne de la boucle `for` à cause du fait que l'on fait 6 itérations au lieu de 5.
-Il faut donc mettre un `<` au lieu de `<=` pour éviter les problème d'overflow.
+Dans tous les cas, il y a un problème avec la borne de la boucle `for` à cause du fait que l'on fait 6 itérations au lieu de 5. <br>
+Il faut donc mettre un `<` au lieu de `<=` pour éviter les problème d'overflow. <br>
 La correction a été faite à la ligne `8` dans le fichier `./ex4/somme.c`.
 
 ### <u> Exercice 5 </u>
@@ -200,7 +200,7 @@ Grâce à `gdb`, il est possible de voir que si `n = 1` et qu'on essaie de soust
 L'erreur est dû au fait que la condition du `if` ne permet pas de s'arrêter assez tôt pour éviter le problème.
 
 #### &emsp; c)
-Dans le `if`, il fallait mettre `2` au lieu de `0`.
+Dans le `if`, il fallait mettre `2` au lieu de `0`. <br>
 La correction a été faites à la ligne `7` dans le fichier `./ex6/fibo.c`.
 
 
@@ -214,7 +214,7 @@ Un thread, ça ressemble à un processus, à l'exception qu'il s'exécute dans l
 Un mutex est une sorte de "verrou" qui permet, en général, de bloquer un ou plusieurs threads afin d'éviter que des variables partagées soient utilisées en même temps.
 
 ##### &emsp;&emsp;&emsp; iii)
-Le code crée 2 threads et attend qu'ils se terminent.
+Le code crée 2 threads et attend qu'ils se terminent. <br>
 Les 2 threads se lancent, font leurs opérations, mais il y a un *deadlock* car les deux essaient de récupérer un mutex déjà pris. 
 
 #### &emsp; b)
@@ -226,11 +226,11 @@ Le code ne dépend d'aucune bibliothèque système, la commande `make` ne renvoi
 Le code ne se termine jamais car il y a un *deadlock*, les deux threads essaie de récupérer un mutex déjà pris.
 
 ##### &emsp;&emsp;&emsp; i)
-Pour afficher l'état du programme, il faut d'abord se rattacher à lui après l'avoir exécuté en faisant `sudo gdb -p <PID_du_programme>` (sans `sudo`, gdb ne se rattache pas au programme pour moi).
+Pour afficher l'état du programme, il faut d'abord se rattacher à lui après l'avoir exécuté en faisant `sudo gdb -p <PID_du_programme>` (sans `sudo`, gdb ne se rattache pas au programme pour moi). <br>
 Ensuite, on utilise la commande `backtrace` pour voir l'état du programme.
 
 ##### &emsp;&emsp;&emsp; ii)
-L'état que j'ai obtennu est le suivant :
+L'état que j'ai obtenu est le suivant :
 
 ```c
 (gdb) backtrace 
@@ -250,6 +250,6 @@ L'état que j'ai obtennu est le suivant :
 La commande `thread apply all bt` permet d'avoir un `backtrace` pour tous les threads du programme.
 
 #### &emsp; d)
-Pour corriger le code, il existe plusieurs solutions.
-L'une d'entre elle serait, dans `thread1`, de déverrouiller `lock1` en premier après la simulation du travail.
+Pour corriger le code, il existe plusieurs solutions. <br>
+L'une d'entre elle serait, dans `thread1`, de déverrouiller `lock1` en premier après la simulation du travail. <br>
 La correction se trouve dans `./ex7/lock.c` à la ligne `16`.
